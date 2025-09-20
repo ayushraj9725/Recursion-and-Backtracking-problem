@@ -1,0 +1,167 @@
+Problem : Print Pattern using recursion
+
+Problem Statement : 
+
+Given a number n, print the following pattern without using any loop.
+
+n, n-5, n-10, ..., 0, 5, 10, ..., n+5, n
+
+Examples : 
+
+Input: n = 16
+Output: 16, 11, 6, 1, -4, 1, 6, 11, 16
+
+Input: n = 10
+Output: 10, 5, 0, 5, 10
+
+
+Problem Solution : C++ //////////////////////////////////
+
+
+#include <iostream>
+using namespace std;
+
+// Recursive function to print the pattern without any extra
+// variable
+void printPattern(int n)
+{
+    // Base case (When n becomes 0 or negative)
+    if (n == 0 || n < 0) {
+        cout << n << " ";
+        return;
+    }
+
+    // First print decreasing order
+    cout << n << " ";
+    printPattern(n - 5);
+
+    // Then print increasing order
+    cout << n << " ";
+}
+
+int main()
+{
+    int n = 16;
+  
+      // Function call
+    printPattern(n);
+    return 0;
+}
+
+
+/ **************** ***************  JAVA CODE  ***************** ******************* \
+
+import java.io.*;
+
+class Solution {
+
+    // Recursive function to print the
+    // pattern without any extra variable
+    static void printPattern(int n)
+    {
+
+        // Base case (When n becomes 0 or
+        // negative)
+        if (n == 0 || n < 0) {
+
+            System.out.print(n + " ");
+
+            return;
+        }
+
+        // First print decreasing order
+        System.out.print(n + " ");
+
+        printPattern(n - 5);
+
+        // Then print increasing order
+        System.out.print(n + " ");
+    }
+
+    public static void main(String[] args)
+    {
+
+        int n = 16;
+
+          // Function call
+        printPattern(n);
+    }
+}
+
+
+
+/*********************************  WHEN YOU HAVE TO RETURN VECTOR OR LIST OF HAVING THESE APTTERN   ******************************* /
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> pattern(int n) {
+    vector<int> ans;
+    
+    // Base case: when n <= 0
+    if (n <= 0) {
+        ans.push_back(n);
+        return ans;
+    }
+    
+    // Push current n
+    ans.push_back(n);
+    
+    // Get the pattern for n-5
+    vector<int> temp = pattern(n - 5);
+    
+    // Append recursive result
+    ans.insert(ans.end(), temp.begin(), temp.end());
+    
+    // Push n again while returning (to build back up)
+    ans.push_back(n);
+    
+    return ans;
+}
+
+int main() {
+    int n = 16;
+    vector<int> res = pattern(n);
+    for (int x : res) cout << x << " ";
+    return 0;
+}
+
+
+///////////////////    JAVA CODE   /////////////////
+
+
+import java.util.*;
+
+public class Pattern {
+    
+    public static List<Integer> pattern(int n) {
+        List<Integer> ans = new ArrayList<>();
+        
+        // Base case
+        if (n <= 0) {
+            ans.add(n);
+            return ans;
+        }
+        
+        // Push current number
+        ans.add(n);
+        
+        // Recursive call and combine result
+        List<Integer> temp = pattern(n - 5);
+        ans.addAll(temp);
+        
+        // Push current number again while returning (to go back up)
+        ans.add(n);
+        
+        return ans;
+    }
+    
+    public static void main(String[] args) {
+        int n = 16;
+        List<Integer> res = pattern(n);
+        for (int x : res) {
+            System.out.print(x + " ");
+        }
+    }
+}
