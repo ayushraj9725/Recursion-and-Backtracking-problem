@@ -165,3 +165,39 @@ public class Pattern {
         }
     }
 }
+
+
+/**********************************************   another Solution   ****************************************************/
+
+
+
+class Solution {
+    
+    void solve(int n ,  ArrayList<Integer> ans){
+        
+        // base case 
+        if(n <= 0){
+            ans.add(n);
+            return ;
+        }
+        
+        ans.add(n);
+        solve(n-5,ans);
+        ans.add(n);
+    }
+    
+    public ArrayList<Integer> pattern(int n) {
+        // code here
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        solve(n,ans);
+        
+        return ans ;
+        
+    }
+}
+
+
+
+/*************************************************************************************************************************/
