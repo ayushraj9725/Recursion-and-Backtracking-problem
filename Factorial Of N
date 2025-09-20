@@ -1,0 +1,48 @@
+
+Problem : Factorial Of N 
+
+Problem Statement : 
+
+
+
+Problem Solution : 
+
+
+C++ SOLUTION 
+
+
+ class Solution {
+  public:
+    int factorial(int n) {
+        // code here
+        if(n == 0){
+            return 1 ;
+            
+        }
+        
+        return factorial(n-1) * n ;
+        
+    }
+};
+
+
+/////////////////////////////   Time Complexity: O(n)    and    Auxiliary Space: O(n)   stack used here  
+
+
+
+JAVA SOLUTION  
+
+
+class Solution {
+    // Function to calculate factorial of a number.
+    int factorial(int n) {
+        // code here
+          // code here
+        if(n == 0){
+            return 1 ;
+            
+        }
+        
+        return factorial(n-1) * n ;
+    }
+}
