@@ -1,0 +1,117 @@
+
+Problem : Decimal To Binary Conversion
+
+Problem Statement : 
+
+Given a decimal number n, return its binary equivalent.
+
+Examples :
+
+Input: n = 12
+Output: 1100
+Explanation: The binary representation of 12 is "1100", since 12 = 1×23 + 1×22 + 0×21 + 0×20
+
+Input: n = 33
+Output: 100001
+Explanation: The binary representation of 33 is "100001", since 33 = 1×25 + 0×24 + 0×23 + 0×22 + 0×21 + 1×20
+
+Constraints:
+1 ≤ n ≤ 231 - 1
+
+/***************************************    SOLUTION C++ USING RECURSIOn  *****************************************/
+
+
+Using String - O(log2n) Time and O(log2n) Space  
+
+class Solution {
+  public:
+  
+    void decToBin(int n , string &s){
+        
+        if(n > 1){
+            decToBin(n/2,s);
+        }
+        
+        s += (n % 2) + '0' ;
+        
+    }
+    string decToBinary(int n) {
+        // code here
+      
+      string res = ""  ;
+      
+      decToBin(n,res);
+      
+      return res ;
+      
+    }
+};
+
+/*************************************** SOLUTION JAVA RECURSION  **************************************/
+
+class Solution {
+    static String decToBinary(int n) {
+        // code here
+        // base case 
+        
+        if(n == 1){
+            return String.valueOf(1);
+        }
+        
+        if(n > 1){
+            return decToBinary(n/2) + (n % 2) ;
+        }
+    
+        return String.valueOf(n);
+        
+    }
+}
+
+
+/***************************************  SOLUTIOn USING ITERATIve APPROACH   ********************************/
+
+class Solution {
+  public:
+    string decToBinary(int n) {
+        // code here
+        
+        string b = "" ;
+        
+        while(n > 0){
+            int d = n % 2 ;
+            b.push_back(d + '0');
+            n = n / 2 ;
+        }
+        
+        reverse(b.begin(),b.end());
+        
+        
+        return b ;
+        
+    }
+};
+
+Division by 2 - O(log₂(n)) Time and O(log₂(n)) Space
+
+/***********       JAVA       ******************/
+
+ static String decToBinary(int n) {
+        StringBuilder bin = new StringBuilder();
+
+        while (n > 0) {
+            int bit = n % 2;
+            bin.append((char) ('0' + bit));
+            n /= 2;
+        }
+        
+        // reverse the string
+        bin.reverse();
+        return bin.toString();
+    }
+    
+    public static void main(String[] args) {
+        int n = 12;
+        System.out.println(decToBinary(n));
+    }
+
+/*******************************************************************************/
