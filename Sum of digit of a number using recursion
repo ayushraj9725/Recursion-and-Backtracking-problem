@@ -1,0 +1,67 @@
+
+Problem : Sum of digit of a number using recursion
+
+Problem Statement : 
+
+Given a number, we need to find sum of its digits using recursion.
+
+Examples: 
+Input: 12345
+Output: 15
+Explanation: Sum of digits → 1 + 2 + 3 + 4 + 5 = 15
+
+Input: 45632
+Output: 20 
+
+Approach:
+To understand the algorithm, consider the number 12345 and refer to the illustration below..
+
+Extract the last digit: 12345 % 10 = 5, pass 1234 to the next step.
+Extract next digit: 1234 % 10 = 4, pass 123 to the next step.
+Extract next digit: 123 % 10 = 3, pass 12 to the next step.
+Extract next digit: 12 % 10 = 2, pass 1 to the next step.
+Extract last digit: 1 % 10 = 1, pass 0, stopping recursion.
+
+
+/****************************************  SOLUTION C++ USING RECURSION **************************************/
+
+
+class Solution {
+  public:
+    int sumOfDigits(int n) {
+        // code here
+        if(n == 0) return 0 ;
+        if(n == 1) return 1 ;
+        
+        return sumOfDigits(n/10) + (n % 10) ;
+        
+    }
+};
+int main() 
+{ 
+    int num = 12345; 
+    int result = sum_of_digit(num); 
+    cout << result << endl; 
+    return 0; 
+}
+/****************************************** JAVA SOLUTION  ****************************************/
+
+
+static int sum_of_digit(int n)
+    { 
+        if (n == 0)
+            return 0;
+        return (n % 10 + sum_of_digit(n / 10));
+    }
+
+    // Driven Program to check above
+    public static void main(String args[])
+    {
+        int num = 12345;
+        int result = sum_of_digit(num);
+        System.out.println(result);
+    }
+
+
+/******************************  Iterative Approach Try Your Self ****************************/
+
