@@ -1,0 +1,303 @@
+
+Problem : First n Fibonacci
+
+
+Problem Statement : 
+
+Given a number n, return an array containing the first n Fibonacci numbers.
+Note: The first two numbers of the series are 0 and 1.
+
+Examples:
+
+Input: n = 5
+Output: [0, 1, 1, 2, 3]
+
+Input: n = 7
+Output: [0, 1, 1, 2, 3, 5, 8]
+
+Input: n = 2
+Output: [0, 1]
+
+Constraints:
+1 <= n <= 30
+
+Expected Complexities
+Time Complexity: O(n)
+Auxiliary Space: O(n)
+
+/********************************************   USING PLANE RECURSION  *****************************************/
+
+C++ IMplementation 
+
+// User function template for C++
+
+class Solution {
+  public:
+    // Function to return list containing first n fibonacci numbers.
+    
+    int solve(int n){
+        
+        // base case
+        if(n <= 1){
+            return n ;
+        }
+        
+        return solve(n-2) + solve(n-1) ;
+        
+    }
+    
+    vector<int> fibonacciNumbers(int n) {
+        // code here
+        
+        // using recursion version 
+        
+        vector<int> ans ;
+        
+        for(int i = 0 ; i < n ; i++){
+            ans.push_back(solve(i));
+        }
+        
+        return ans ;
+        
+        // Time complexity :O(N * 2^n)  and space complexiy : O(N) for using stack 
+        
+    }
+};
+
+/***********************************  JAVA IMPLEMETtion  ***************************************/
+
+public class FibonacciRecursion {
+    // recursive helper for a single Fibonacci number
+    private static int fib(int k) {
+        if (k <= 1) return k;          // base cases
+        return fib(k - 1) + fib(k - 2); // recursive calls
+    }
+
+    public static int[] fibonacciNumbers(int n) {
+        if (n <= 0) return new int[0];
+        if (n == 1) return new int[]{0};
+
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = fib(i);  // compute each Fibonacci number recursively
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 6;
+        int[] fibs = fibonacciNumbers(n);
+        for (int x : fibs) {
+            System.out.print(x + " ");
+        }
+    }
+}
+
+/*************************************   C++ USING MEMORIZATION   **************************************/
+
+
+int fib(int n, vector<int> &dp) {
+    if (n <= 1) return n;                // base cases
+    if (dp[n] != -1) return dp[n];       // already computed
+    return dp[n] = fib(n-1, dp) + fib(n-2, dp);  // call store and return 
+}
+
+vector<int> fibonacciNumbers(int n) {
+    vector<int> dp(n+1, -1);  // memo array
+    vector<int> ans;
+    for (int i = 0; i < n; i++) {
+        ans.push_back(fib(i, dp)); // compute ith fib using memoization
+    }
+    return ans;
+}
+
+TIME COMPLEXITY : O(N) and  SPACE COMPLEXITY : O(N)  
+
+/******************************************  JAVA WITH MEMORIZATION  **************************************/
+
+import java.util.Arrays;
+
+public class FibonacciMemo {
+    // recursive helper with memoization
+    private static int fib(int k, int[] dp) {
+        if (k <= 1) return k;
+        if (dp[k] != -1) return dp[k];
+        dp[k] = fib(k - 1, dp) + fib(k - 2, dp);
+        return dp[k];
+    }
+
+    public static int[] fibonacciNumbers(int n) {
+        // edge cases
+        if (n <= 0) return new int[0];
+        if (n == 1) return new int[]{0};
+
+        int[] dp = new int[n];     // memo array
+        Arrays.fill(dp, -1);
+
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = fib(i, dp);   // use recursion + memoization
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 6;
+        int[] fibs = fibonacciNumbers(n);
+        for (int x : fibs) {
+            System.out.print(x + " ");
+        }
+    }
+
+
+/******************************************************  C++ TABULATION  **********************************************/
+
+// User function template for C++
+
+class Solution {
+  public:
+    // Function to return list containing first n fibonacci numbers.
+    
+    vector<int> solve(int n, vector<int> &dp){
+        
+        // base case
+        if(n == 0){
+            return {0} ;
+        }
+        if(n == 1){
+            return {0};
+        }
+        dp[0] = 0 ;
+        dp[1] = 1 ;
+        
+        for(int i = 2 ;i < n ; i++){
+            dp[i] = dp[i-2] + dp[i-1];
+        }
+        
+        return dp ;
+        
+    }
+    
+    vector<int> fibonacciNumbers(int n) {
+        // code here
+        
+        // using recursion version 
+        
+        vector<int> dp(n) ;
+        
+        return solve(n,dp);
+        
+        // Time complexity :O(N)  and space complexiy : O(N) , O(N) for returning result not considered to be as SC
+        
+    }
+};
+
+/************************************************************* JAVA TABULATION  *****************************************************************/
+
+public class Fibonacci {
+    public static int[] fibonacciNumbers(int n) {
+        if (n <= 0) {
+            return new int[0];  // no numbers
+        }
+        if (n == 1) {
+            return new int[]{0}; // only first fib number
+        }
+
+        int[] ans = new int[n];
+        ans[0] = 0;
+        ans[1] = 1;
+
+        for (int i = 2; i < n; i++) {
+            ans[i] = ans[i - 1] + ans[i - 2];
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 6;
+        int[] fibs = fibonacciNumbers(n);
+        for (int x : fibs) {
+            System.out.print(x + " ");
+        }
+    }
+}
+
+OR 
+
+vector<int> fibonacciNumbers(int n) {
+    vector<int> ans;
+    if (n >= 1) ans.push_back(0);
+    if (n >= 2) ans.push_back(1);
+    for (int i = 2; i < n; i++)
+        ans.push_back(ans[i-1] + ans[i-2]);
+    return ans;
+}
+
+// JUST DO THIS 
+
+
+/*********************************************  ITERATIVE APPRAOCH  *************************************************/
+
+O(N) TIME AND O(1) SPACE 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> fibonacciNumbers(int n) {
+    vector<int> ans;
+    if (n <= 0) return ans;
+    if (n >= 1) ans.push_back(0);
+    if (n >= 2) ans.push_back(1);
+
+    long long prev2 = 0, prev1 = 1;  // store last two values
+    for (int i = 2; i < n; i++) {
+        long long curr = prev1 + prev2;
+        ans.push_back((int)curr);
+        prev2 = prev1;
+        prev1 = curr;
+    }
+    return ans;
+}
+
+int main() {
+    int n = 6;
+    vector<int> fibs = fibonacciNumbers(n);
+    for (int x : fibs) cout << x << " ";
+    return 0;
+}
+
+
+
+JAVA 
+
+
+public class FibonacciOptimized {
+    public static int[] fibonacciNumbers(int n) {
+        if (n <= 0) return new int[0];
+        if (n == 1) return new int[]{0};
+        if (n == 2) return new int[]{0, 1};
+
+        int[] ans = new int[n];
+        ans[0] = 0;
+        ans[1] = 1;
+
+        int prev2 = 0, prev1 = 1;
+        for (int i = 2; i < n; i++) {
+            int curr = prev1 + prev2;
+            ans[i] = curr;
+            prev2 = prev1;
+            prev1 = curr;
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 6;
+        int[] fibs = fibonacciNumbers(n);
+        for (int x : fibs) System.out.print(x + " ");
+    }
+}
+
+
+/***************************************************  
