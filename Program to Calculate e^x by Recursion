@@ -1,0 +1,149 @@
+ Problem : Program to Calculate e^x by Recursion
+
+ Problem Statement : 
+
+ The value of the Exponential function can be calculated using Taylor Series. 
+
+As the number of terms increases the more precise value of ex is obtained.
+To find e^x using the recursive function, we need to use static variables. A function can return only one value, and when we need to include multiple values in a recursive function, we use static variables. 
+The Taylor Series is a combination of multiple values like sum, power and factorial term, hence we will use static variables.
+For the power of x, we will use p, and for factorials, we will use f as static variables. 
+
+The function shown below is used to increase the power of x.  
+
+
+/*****************************************  SOLUTION USING C++ AND RECURSION  ***************************************/
+
+#include<iostream>
+
+using namespace std ;
+
+double exp(int e , int n)
+{
+  static double p = 1 , f = 1 ;
+   double r = 1 ;
+   // base case
+   if(n == 0) return 1 ;
+
+   // recursive case call
+
+   exp(e,n-1);
+   // update or calculate the p and f for power and factorial 
+   p = p * e ;
+   f = f * n ;
+
+   // now return the result 
+   return r + p / f ;
+ }
+
+int main(){
+   int e = 4 , n = 15 ;
+   cout << "\n " << exp(4.15) ;
+
+   return 0;
+}
+
+TIME COMPLEXITY : O(n(n+1)/2)  means O(N^2)  and space O(N^2) for using stack utilization
+
+
+/****************************************  JAVA CODE *********************************************/
+
+ // Recursive Function with static
+    // variables p and f
+    static double p = 1, f = 1;
+    static double e(int x, int n)
+    {
+        double r;
+
+        // Termination condition
+        if (n == 0)
+            return 1;
+
+        // Recursive call
+        r = e(x, n - 1);
+
+        // Update the power of x
+        p = p * x;
+
+        // Factorial
+        f = f * n;
+
+        return (r + p / f);
+    }
+
+    public static void main(String[] args)
+    {
+        int x = 4, n = 15;
+        DecimalFormat df = new DecimalFormat("0.######");
+        System.out.println(df.format(e(x, n)));
+    }
+
+/**********************************************  ITERATIVE APPROACH PLEASE TRY WITH YOUR SELF  ********************************************** /
+
+
+// ************************************ NOW OPTIMIZE THIS APPROACH IN LINEAR TIME BY REDUCING THE NO OF CALLS *********************************** //
+
+//   C++ IMPLEMENTATION RECURSIVELY    //   O(N) time and  O(N)  Space 
+
+ double exp(int e ,int n){
+     static int r = 1 ;
+   
+     // base case 
+     if(n == 0) return r ;
+
+     r = 1 + ( r * e/n ) ;
+
+     return exp(e,n-1) ;  
+ }
+  int main(){
+   int e = 4 , n = 15 ;
+   cout << "\n " << exp(4.15) ;
+
+   return 0;
+}
+
+/******************************************************************************  JAVA CODE ************************************************************/
+
+static double r = 1;
+    static double e(int x, int n)
+    {
+
+        // Termination condition
+        if (n == 0)
+            return r ;
+
+        // Recursive call
+        r = (r * (x / n)) + 1 ;
+
+        return exp(x,n-1) ;
+    }
+
+    // Driver code
+    public static void main(String[] args)
+    {
+        int x = 4, n = 15;
+        DecimalFormat df = new DecimalFormat("0.######");
+        System.out.println(df.format(e(x, n)));
+    }
+
+****************************************************************************************************************************************************************
+
+
+ C++ implementation " Iterative "  in JAVa use same code 
+
+ double exp(int e ,int n){
+     int r = 1 ;
+
+     while(n > 0){
+         r = (r * e/n) + 1 ;
+         n-- ;
+     }
+   return r ;
+ }
+
+ int main(){
+   int e = 4 , n = 15 ;
+   cout << "\n " << exp(4.15) ;
+
+   return 0;
+}
